@@ -1,3 +1,14 @@
 ^^KRW SDR deals today^^
 
 ^^KRW Outrights^^
+2020-03-05 - 3Y traded 40k DV01 (Rate: 0.0037)
+2021-04-12 - 2Y traded 20k DV01 (Rate: 0.0030)
+2016-05-10 - 7Y traded 143k DV01 (Rate: 0.0089)
+2022-06-21 - 12M traded 102k DV01 (Rate: 0.0197)
+2019-06-24 - 4Y traded 26k DV01 (Rate: 0.0055)
+2019-06-25 - 4Y traded 51k DV01 (Rate: 0.0055)
+2019-07-10 - 4Y traded 96k DV01 (Rate: 0.0068)
+2013-08-30 - 10Y traded 347k DV01 (Rate: 0.0347)
+2021-09-14 - 2Y traded 76k DV01 (Rate: 0.0073)
+H2 - 2Y traded 54k DV01 (Rate: 0.0096)
+2013-09-25 - 10Y traded 661k DV01 (Rate: 0.0331)

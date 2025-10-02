@@ -1,6 +1,6 @@
 # src/paths.py
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Determine the repository root
 REPO_ROOT = Path(__file__).resolve().parents[1]  # points to /opt/render/project

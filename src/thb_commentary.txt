@@ -1,26 +1,10 @@
 ^^THB SDR deals today^^
 
 ^^THB Outrights^^
-Spot - 2Y traded 13k DV01 (Rate range: 0.0101–0.0101)
-2025-05-19 - 5Y traded 3k DV01
-2025-05-20 - 5Y traded 5k DV01
-2025-08-29 - 5Y traded 7k DV01
-Spot - 5Y traded 132k DV01 (Rate range: 0.0113–0.0114)
-Z5 - 5Y traded 31k DV01 (Rate range: 0.0114–0.0114)
-H6 - 5Y traded 13k DV01 (Rate range: 0.0108–0.0117)
-M5 - 7Y traded 6k DV01
-2022-06-27 - 10Y traded 2k DV01
-2023-06-28 - 10Y traded 4k DV01
-2023-07-07 - 10Y traded 6k DV01
-2023-07-11 - 10Y traded 6k DV01
-2024-04-22 - 10Y traded 6k DV01
-2024-04-23 - 10Y traded 5k DV01
-2024-04-24 - 10Y traded 3k DV01
-2024-05-08 - 10Y traded 3k DV01
-2025-06-06 - 10Y traded 2k DV01
-2025-08-25 - 10Y traded 4k DV01
-2025-08-27 - 10Y traded 2k DV01
-2025-08-28 - 10Y traded 6k DV01
-2025-08-29 - 10Y traded 5k DV01
-Spot - 10Y traded 174k DV01 (Rate range: 0.0146–0.0147)
-Z5 - 10Y traded 5k DV01 (Rate range: 0.0000–0.0148)
+2020-03-25 - 3Y traded 1k DV01 (Rate: 0.0082)
+2022-05-31 - 12M traded 3k DV01 (Rate: 0.0098)
+2022-06-06 - 12M traded 2k DV01 (Rate: 0.0104)
+2022-06-08 - 12M traded 2k DV01 (Rate: 0.0120)
+2022-06-23 - 12M traded 3k DV01 (Rate: 0.0153)
+2022-09-30 - 9M traded 3k DV01 (Rate: 0.0156)
+2022-10-06 - 9M traded 3k DV01 (Rate: 0.0153)

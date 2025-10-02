@@ -1,4 +1,4 @@
 ^^INR SDR deals today^^
 
 ^^INR Outrights^^
-U5 - 5Y traded 482k DV01 (Rate: 0.0564)
+2021-03-05 - 2Y traded 7k DV01 (Rate: 0.0508)

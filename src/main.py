@@ -1,12 +1,13 @@
+# src/main.py
 import os
 import sys
 # DON'T CHANGE THIS !!!
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from flask import Flask, send_from_directory
+from pathlib import Path
+from flask import Flask, send_from_directory, jsonify
 from flask_cors import CORS
 from src.models.trade_data import db
-from src.routes.api_fixed import api_bp, init_data_processor
 import logging
 
 # Configure logging
@@ -14,94 +15,61 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
-
-# Configure app for production
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
 
-# Single source of truth for database configuration
-from pathlib import Path
-
-# Prefer DATABASE_URL if provided (Render Postgres etc)
-database_url = os.environ.get('DATABASE_URL')
-
-if database_url:
-    # Render/Heroku style compatibility
-    if database_url.startswith('postgres://'):
-        database_url = database_url.replace('postgres://', 'postgresql://', 1)
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+# --- DB configuration (single source of truth) ---
+db_url = os.environ.get("DATABASE_URL")
+if db_url:
+    # Prefer managed Postgres if provided
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+    logger.info(f"[DB] Using PostgreSQL: {db_url}")
 else:
-    # SQLite configuration - single source of truth
-    APP_IN_RENDER = bool(os.environ.get("RENDER"))  # Render always sets this
-    
-    if APP_IN_RENDER:
-        # Force use of /var/data and fail fast if not available
-        db_dir = Path("/var/data")
-        
-        # Hard-stop if persistent disk is not mounted and writable
-        def check_disk(path="/var/data"):
-            p = Path(path)
-            exists = p.exists()
-            try:
-                testfile = p / ".rw_test"
-                testfile.write_text("ok", encoding="utf-8")
-                writable = True
-                testfile.unlink(missing_ok=True)
-            except Exception as e:
-                writable = False
-            return exists, writable
-        
-        exists, writable = check_disk("/var/data")
-        logger.info(f"[DISK] /var/data exists={exists} writable={writable}")
-        
-        if not (exists and writable):
-            raise RuntimeError("Persistent disk /var/data not available or not writable - check Render disk configuration")
-        
-        logger.info(f"✅ Using persistent disk at {db_dir}")
-    else:
-        db_dir = Path(os.environ.get("DB_DIR", Path.cwd()))
-    
-    db_dir.mkdir(parents=True, exist_ok=True)
+    # SQLite with persistent disk if available
+    db_dir = Path(os.environ.get("DB_DIR", "/var/data"))
+    try:
+        db_dir.mkdir(parents=True, exist_ok=True)
+        # sanity write test (non-fatal)
+        t = db_dir / ".rw_test"
+        t.write_text("ok", encoding="utf-8")
+        t.unlink(missing_ok=True)
+        disk_ok = True
+        logger.info(f"[DB] Using persistent disk: {db_dir}")
+    except Exception as e:
+        disk_ok = False
+        # fallback to project dir if disk not mounted/writable yet
+        db_dir = Path("/opt/render/project")
+        db_dir.mkdir(parents=True, exist_ok=True)
+        logger.warning(f"[DISK] /var/data not writable, falling back to {db_dir}: {e}")
+
     sqlite_path = db_dir / "app.db"
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{sqlite_path}"
-    print(f"[DB] Using database path: {sqlite_path}")
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{sqlite_path}"
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Enable CORS
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 CORS(app)
-
-# Initialize DB BEFORE importing/registering routes
 db.init_app(app)
 
-# Import routes AFTER db is initialized
-from src.routes.api_fixed import api_bp, init_data_processor
+# --- HEALTH ENDPOINT (for Render) ---
+@app.get("/health")
+def health():
+    return jsonify(ok=True), 200
 
-# Register API blueprint
-app.register_blueprint(api_bp, url_prefix='/api')
-
-# Create database tables (only if they don't exist)
+# Log the effective DB once app context is available
 with app.app_context():
-    # Check if database file exists and has data
-    db_file = Path(app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", ""))
-    db_exists = db_file.exists() and db_file.stat().st_size > 0
-    
-    if not db_exists:
-        logger.info("Creating new database tables...")
-        db.create_all()
-        logger.info("Database tables created successfully")
-    else:
-        logger.info(f"Database already exists at {db_file} ({db_file.stat().st_size} bytes)")
-        # Just ensure tables exist without recreating
-        db.create_all()
-    
-    # Guard against accidental overrides - hard-stop if wrong path
-    effective = app.config["SQLALCHEMY_DATABASE_URI"]
-    assert "/opt/render/project/src/app.db" not in effective, f"Refusing to use {effective} - must use /var/data/app.db"
-    assert "src/app.db" not in effective, f"Refusing to run against {effective} — use absolute path outside /src"
-    engine_id = id(db.get_engine())
-    logger.info(f"[BOOT] DB locked to: {effective} (engine_id={engine_id})")
+    uri = app.config["SQLALCHEMY_DATABASE_URI"]
+    logger.info(f"[BOOT] DB URI: {uri}")
 
-# Initialize and start the automatic scheduler
+# Import routes/services AFTER db.init_app(app)
+from src.routes.api_fixed import api_bp, init_data_processor
+app.register_blueprint(api_bp, url_prefix="/api")
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+    logger.info("Database tables created successfully")
+
+# Start background worker(s) inside app context
 with app.app_context():
     scheduler = init_data_processor(app)
     if scheduler:
@@ -139,4 +107,3 @@ if __name__ == '__main__':
     logger.info("🚀 Starting DTCC Analysis Web Application...")
     logger.info("⏰ Background automation: DTCCParser + DTCCAnalysis every 60 seconds")
     app.run(host='0.0.0.0', port=5000, debug=False)
-

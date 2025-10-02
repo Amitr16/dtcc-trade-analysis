@@ -2,23 +2,15 @@ services:
   - type: web
     name: dtcc-trade-analysis
     env: python
-    plan: starter
     rootDir: ./
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT main_render:app
-    envVars:
-      - key: FLASK_ENV
-        value: production
-      - key: OPENAI_API_KEY
-        sync: false  # You'll set this in Render dashboard
-      - key: RENDER
-        value: true
-      - key: DB_DIR
-        value: /var/data
-      - key: DATA_DIR
-        value: /var/data
-    healthCheckPath: /
     disk:
       name: dtcc-data
       mountPath: /var/data
       sizeGB: 1
+    envVars:
+      - key: DB_DIR
+        value: /var/data
+      - key: PYTHONUNBUFFERED
+        value: "1"

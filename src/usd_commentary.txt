@@ -1,53 +1,89 @@
 ^^USD SDR deals today^^
 
 ^^USD Outrights^^
-Spot - 1M traded 1k DV01 (Rate range: 0.0000–0.0411)
-2025-10-29 - 1M traded 5k DV01 (Rate: 0.0386)
+Spot - 1M traded 2k DV01 (Rate range: 0.0000–0.0411)
+2025-10-29 - 1M traded 7k DV01 (Rate range: 0.0386–0.0387)
 2025-10-15 - 2M traded 1k DV01 (Rate range: 0.0000–0.0390)
-Spot - 3M traded 1k DV01 (Rate: 0.0387)
-2025-12-10 - 2M traded 5k DV01 (Rate: 0.0364)
+Spot - 3M traded 3k DV01 (Rate range: 0.0361–0.0396)
+2025-12-10 - 2M traded 9k DV01 (Rate range: 0.0000–0.0366)
+2026-01-28 - 2M traded 4k DV01 (Rate range: 0.0000–0.0355)
+H6 - 1M traded 1k DV01 (Rate: 0.0341)
 6M - 2M traded 4k DV01 (Rate: 0.0333)
 2025-09-18 - 12M traded 1k DV01
+2026-02-10 - 12M traded 1k DV01 (Rate range: 0.0329–0.0329)
+Spot - 2Y traded 20k DV01 (Rate range: 0.0000–0.0334)
 2025-09-25 - 2Y traded 4k DV01
-U5 - 2Y traded 1k DV01
+U5 - 2Y traded 3k DV01
 1Y - 12M traded 1k DV01
-Spot - 2Y traded 7k DV01 (Rate range: 0.0333–0.0333)
+Z5 - 2Y traded 4k DV01
 H6 - 2Y traded 1k DV01
-U5 - 3Y traded 2k DV01
+Spot - 3Y traded 2k DV01 (Rate range: 0.0000–0.0329)
+U5 - 3Y traded 6k DV01
+Z5 - 3Y traded 10k DV01 (Rate range: 0.0323–0.0323)
 2024-09-27 - 5Y traded 22k DV01 (Rate range: 0.0370–0.0384)
+2025-12-01 - 4Y traded 1k DV01
+2Y - 2Y traded 1k DV01 (Rate: 0.0324)
+Z5 - 4Y traded 2k DV01
 2025-04-04 - 5Y traded 3k DV01 (Rate: 0.0043)
 2025-05-08 - 5Y traded 1k DV01
+Spot - 5Y traded 100k DV01 (Rate range: 0.0000–0.0370)
 2025-07-03 - 5Y traded 3k DV01
 2025-07-10 - 5Y traded 3k DV01
-U5 - 5Y traded 2k DV01
-Spot - 5Y traded 11k DV01 (Rate range: 0.0000–0.0333)
+U5 - 5Y traded 5k DV01
+Z5 - 5Y traded 20k DV01 (Rate range: 0.0325–0.0450)
+H6 - 5Y traded 1k DV01
 2021-09-22 - 10Y traded 2k DV01 (Rate: 0.0041)
 U9 - 2Y traded 2k DV01 (Rate: 0.0355)
-2025-12-01 - 7Y traded 2k DV01 (Rate: 0.0341)
+Spot - 6Y traded 4k DV01 (Rate range: 0.0338–0.0338)
+2025-12-01 - 7Y traded 13k DV01 (Rate range: 0.0340–0.0341)
 U5 - 7Y traded 1k DV01
 6Y - 1Y traded 1k DV01
+Spot - 7Y traded 6k DV01 (Rate range: 0.0000–0.0344)
+Z5 - 7Y traded 3k DV01 (Rate range: 0.0342–0.0343)
 U1 - 2Y traded 4k DV01 (Rate: 0.0389)
 8Y - 12M traded 1k DV01
+2025-12-31 - 9Y traded 13k DV01 (Rate: 0.0357)
 2025-07-03 - 10Y traded 1k DV01
 2025-07-10 - 10Y traded 1k DV01
-Spot - 10Y traded 25k DV01 (Rate range: 0.0000–0.0361)
-U5 - 10Y traded 5k DV01 (Rate: 0.0442)
+Spot - 10Y traded 78k DV01 (Rate range: 0.0000–0.0362)
+U5 - 10Y traded 15k DV01 (Rate: 0.0442)
 9Y - 12M traded 1k DV01
 U3 - 2Y traded 2k DV01 (Rate: 0.0415)
-Z2 - 3Y traded 2k DV01
-Z5 - 10Y traded 3k DV01
+2025-09-23 - 10Y traded 1k DV01
+2025-09-26 - 10Y traded 1k DV01
+5Y - 5Y traded 3k DV01 (Rate: 0.0394)
+Z2 - 3Y traded 4k DV01
+Z5 - 10Y traded 16k DV01 (Rate range: 0.0361–0.0362)
+Spot - 12Y traded 10k DV01 (Rate range: 0.0000–0.0371)
+2019-05-02 - 19Y traded 3k DV01 (Rate: 0.0089)
 2022-03-22 - 16Y traded 10k DV01 (Rate: 0.0092)
-Z5 - 3Y traded 6k DV01
-Z7 - 3Y traded 3k DV01
+3Y - 10Y traded 1k DV01 (Rate: 0.0394)
+5Y - 10Y traded 3k DV01 (Rate: 0.0420)
+10Y - 5Y traded 7k DV01 (Rate: 0.0445)
+Z7 - 3Y traded 5k DV01
+2019-09-20 - 25Y traded 1k DV01 (Rate: 0.0026)
 2025-05-07 - 20Y traded 1k DV01
 2025-05-30 - 20Y traded 1k DV01
 2025-06-03 - 20Y traded 1k DV01
 2040-09-18 - 5Y traded 2k DV01
-Spot - 20Y traded 2k DV01
+Spot - 20Y traded 2k DV01 (Rate: 0.0394)
+Z5 - 20Y traded 11k DV01
+Z0 - 5Y traded 4k DV01 (Rate: 0.0439)
 2045-09-18 - 5Y traded 1k DV01
 2025-07-03 - 30Y traded 1k DV01
 2025-07-11 - 30Y traded 1k DV01
-Spot - 30Y traded 3k DV01 (Rate: 0.0390)
+Spot - 30Y traded 14k DV01 (Rate range: 0.0000–0.0391)
+U5 - 30Y traded 2k DV01
 2050-09-19 - 5Y traded 1k DV01
-Z5 - 30Y traded 7k DV01 (Rate range: 0.0390–0.0390)
+2040-10-09 - 15Y traded 5k DV01 (Rate: 0.0404)
+Z5 - 30Y traded 17k DV01 (Rate range: 0.0390–0.0390)
 H6 - 30Y traded 1k DV01
+3Y - 30Y traded 1k DV01 (Rate: 0.0398)
+
+^^USD Butterflies^^
+
+^^2Y vs 5Y vs 12Y^^
+Spot - 2Y vs 5Y vs 12Y traded 5k DV01 (Rate: -0.4 bps)
+
+^^3Y vs 5Y vs 20Y^^
+Z5 - 3Y vs 5Y vs 20Y traded 1k DV01 (Rate: -0.6 bps)
