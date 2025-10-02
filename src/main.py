@@ -27,11 +27,12 @@ if database_url:
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
-    # Local/dev fallback (persisted disk path on Render if you really want SQLite)
-    # Use the mounted disk path so it survives restarts:
-    #   render.yaml mounts /opt/render/project
-    sqlite_path = os.environ.get('SQLITE_PATH', '/opt/render/project/data/app.db')
-    os.makedirs(os.path.dirname(sqlite_path), exist_ok=True)
+    # Local/dev fallback - use absolute path to ensure same DB across all processes
+    sqlite_path = os.environ.get('SQLITE_PATH', os.path.abspath('app.db'))
+    # Only create directory if the path has a directory component
+    dir_path = os.path.dirname(sqlite_path)
+    if dir_path:
+        os.makedirs(dir_path, exist_ok=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{sqlite_path}"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -52,6 +53,11 @@ app.register_blueprint(api_bp, url_prefix='/api')
 with app.app_context():
     db.create_all()
     logger.info("Database tables created successfully")
+    
+    # Log database connection details
+    uri = app.config['SQLALCHEMY_DATABASE_URI']
+    engine_id = id(db.get_engine())
+    logger.info(f"[BOOT] DB URI: {uri}, engine_id={engine_id}")
 
 # Initialize and start the automatic scheduler
 with app.app_context():

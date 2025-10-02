@@ -64,6 +64,13 @@ class DataProcessor:
     def run_data_collection(self):
         """Run DTCC data collection and store in database"""
         start_time = time.time()
+        
+        # Log database connection details
+        from flask import current_app
+        uri = current_app.config['SQLALCHEMY_DATABASE_URI']
+        engine_id = id(db.get_engine())
+        logger.info(f"[INGEST] DB URI: {uri}, engine_id={engine_id}")
+        
         log_entry = ProcessingLog(
             process_type='parser',
             status='running',

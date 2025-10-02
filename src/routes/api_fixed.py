@@ -286,29 +286,51 @@ def mcp_query():
     try:
         data = request.get_json()
         query = data.get('query', '').strip()
-        
+
         if not query:
             return jsonify({'success': False, 'error': 'No query provided'}), 400
-        
+
         # Process the query using the MCP query processor
         from src.services.mcp_query_processor import MCPQueryProcessor
         processor = MCPQueryProcessor()
-        
+
         results = processor.process_query(query)
-        
+
         # Get background processing status
         processing_status = get_background_processing_status()
-        
+
         return jsonify({
             'success': True,
             'query': query,
             'results': results,
             'processing_status': processing_status
         })
-        
+
     except Exception as e:
         logger.error(f"Error processing MCP query: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/db-debug', methods=['GET'])
+def db_debug():
+    """Debug endpoint to verify database connection and data"""
+    try:
+        from flask import current_app
+        uri = current_app.config.get("SQLALCHEMY_DATABASE_URI", "")
+        
+        # Get counts using the shared db instance
+        trades = db.session.query(TradeRecord).count()
+        logs = db.session.query(ProcessingLog).count()
+        engine_id = id(db.get_engine())
+        
+        return jsonify({
+            "uri": uri,
+            "engine_id": engine_id,
+            "trade_count": trades,
+            "processing_logs": logs,
+            "absolute_path": os.path.abspath('app.db') if 'app.db' in uri else "N/A"
+        })
+    except Exception as e:
+        return jsonify({"uri": uri, "error": str(e)}), 500
 
 def get_background_processing_status():
     """Get current background processing status"""
