@@ -57,7 +57,7 @@ class MCPQueryProcessor:
             start_datetime = datetime.combine(start_date, datetime.min.time())
             end_datetime = datetime.combine(end_date, datetime.max.time())
             
-            # Use current_app context if available, otherwise create one
+            # Always use current_app context
             if current_app:
                 trades = TradeRecord.query.filter(
                     TradeRecord.created_at >= start_datetime,
@@ -66,15 +66,9 @@ class MCPQueryProcessor:
                     TradeRecord.dv01 > 0
                 ).all()
             else:
-                # Create app context if not available
-                from src.main import app
-                with app.app_context():
-                    trades = TradeRecord.query.filter(
-                        TradeRecord.created_at >= start_datetime,
-                        TradeRecord.created_at <= end_datetime,
-                        TradeRecord.dv01.isnot(None),
-                        TradeRecord.dv01 > 0
-                    ).all()
+                # This should not happen in production, but fallback
+                logger.error("No Flask app context available")
+                return []
             
             return [self._trade_to_dict(trade) for trade in trades]
         except Exception as e:
@@ -86,20 +80,16 @@ class MCPQueryProcessor:
         try:
             from flask import current_app
             
-            # Use current_app context if available, otherwise create one
+            # Always use current_app context
             if current_app:
                 trades = TradeRecord.query.filter(
                     TradeRecord.dv01.isnot(None),
                     TradeRecord.dv01 > 0
                 ).all()
             else:
-                # Create app context if not available
-                from src.main import app
-                with app.app_context():
-                    trades = TradeRecord.query.filter(
-                        TradeRecord.dv01.isnot(None),
-                        TradeRecord.dv01 > 0
-                    ).all()
+                # This should not happen in production, but fallback
+                logger.error("No Flask app context available")
+                return []
             
             return [self._trade_to_dict(trade) for trade in trades]
         except Exception as e:

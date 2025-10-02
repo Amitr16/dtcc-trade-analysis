@@ -28,16 +28,9 @@ def create_app():
     # Configure CORS
     CORS(app)
     
-    # Configure database
-    database_url = os.getenv('DATABASE_URL')
-    if database_url and database_url.startswith('postgres://'):
-        # Convert postgres:// to postgresql:// for SQLAlchemy
-        database_url = database_url.replace('postgres://', 'postgresql://', 1)
-        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-    else:
-        # Use absolute path for SQLite
-        db_path = os.path.join(os.getcwd(), 'app.db')
-        app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+    # Configure database - Use SQLite for both local and production
+    db_path = os.path.join(os.getcwd(), 'app.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
@@ -48,7 +41,7 @@ def create_app():
     # Initialize database with the app
     db.init_app(app)
     
-    # Import routes
+    # Import routes AFTER db is initialized
     from routes.api_fixed import api_bp
     
     # Register blueprints
