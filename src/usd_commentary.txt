@@ -1,6 +1,7 @@
 ^^USD SDR deals today^^
 
 ^^USD Outrights^^
+Spot - 1M traded 1k DV01 (Rate range: 0.0000–0.0411)
 Spot - 3M traded 1k DV01 (Rate: 0.0387)
 6M - 2M traded 1k DV01 (Rate: 0.0333)
 2025-09-25 - 2Y traded 4k DV01
@@ -9,13 +10,18 @@ Spot - 2Y traded 6k DV01 (Rate range: 0.0333–0.0333)
 2025-05-08 - 5Y traded 1k DV01
 Spot - 5Y traded 2k DV01 (Rate range: 0.0332–0.0333)
 8Y - 12M traded 1k DV01
+2025-07-03 - 10Y traded 1k DV01
+2025-07-10 - 10Y traded 1k DV01
+Spot - 10Y traded 16k DV01 (Rate range: 0.0361–0.0361)
 U5 - 10Y traded 1k DV01
 9Y - 12M traded 1k DV01
-Spot - 10Y traded 10k DV01 (Rate range: 0.0361–0.0361)
 2025-05-07 - 20Y traded 1k DV01
 2025-05-30 - 20Y traded 1k DV01
 2025-06-03 - 20Y traded 1k DV01
 2040-09-18 - 5Y traded 1k DV01
 Spot - 20Y traded 2k DV01
 2045-09-18 - 5Y traded 1k DV01
+2025-07-03 - 30Y traded 1k DV01
+2025-07-11 - 30Y traded 1k DV01
+Spot - 30Y traded 2k DV01
 2050-09-19 - 5Y traded 1k DV01

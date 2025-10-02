@@ -4,14 +4,20 @@ services:
     env: python
     plan: starter
     buildCommand: pip install -r requirements.txt
-    startCommand: python main_render.py
+    startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT main_render:app
     envVars:
       - key: FLASK_ENV
         value: production
       - key: OPENAI_API_KEY
         sync: false  # You'll set this in Render dashboard
+      - key: RENDER
+        value: true
+      - key: DB_DIR
+        value: /var/data
+      - key: DATA_DIR
+        value: /var/data
     healthCheckPath: /
     disk:
-      name: dtcc-storage
-      mountPath: /opt/render/project
+      name: dtcc-data
+      mountPath: /var/data
       sizeGB: 1

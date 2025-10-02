@@ -18,6 +18,9 @@ app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'sta
 # Configure app for production
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
 
+# Single source of truth for database configuration
+from pathlib import Path
+
 # Prefer DATABASE_URL if provided (Render Postgres etc)
 database_url = os.environ.get('DATABASE_URL')
 
@@ -27,22 +30,21 @@ if database_url:
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
-    # Local/dev fallback - use absolute path to ensure same DB across all processes
-    # Check if we're in production by looking for Render-specific paths or environment
-    if os.path.exists('/opt/render/project') or os.environ.get('RENDER') or os.environ.get('PORT'):
-        # Production on Render - use the mounted disk
-        sqlite_path = '/opt/render/project/app.db'
-        print(f"[PRODUCTION] Using Render database path: {sqlite_path}")
-    else:
-        # Local development
-        sqlite_path = os.environ.get('SQLITE_PATH', os.path.abspath('app.db'))
-        print(f"[LOCAL] Using local database path: {sqlite_path}")
+    # SQLite configuration - single source of truth
+    APP_IN_RENDER = bool(os.environ.get("RENDER"))  # Render always sets this
     
-    # Only create directory if the path has a directory component
-    dir_path = os.path.dirname(sqlite_path)
-    if dir_path:
-        os.makedirs(dir_path, exist_ok=True)
+    if APP_IN_RENDER:
+        # Use persistent disk mount if available, fallback to project dir
+        db_dir = Path(os.environ.get("DB_DIR", "/var/data"))  # Render "Disk" default mount
+        if not db_dir.exists():
+            db_dir = Path("/opt/render/project")
+    else:
+        db_dir = Path(os.environ.get("DB_DIR", Path.cwd()))
+    
+    db_dir.mkdir(parents=True, exist_ok=True)
+    sqlite_path = db_dir / "app.db"
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{sqlite_path}"
+    print(f"[DB] Using database path: {sqlite_path}")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -63,10 +65,11 @@ with app.app_context():
     db.create_all()
     logger.info("Database tables created successfully")
     
-    # Log database connection details
-    uri = app.config['SQLALCHEMY_DATABASE_URI']
+    # Guard against accidental overrides
+    effective = app.config["SQLALCHEMY_DATABASE_URI"]
+    assert "src/app.db" not in effective, f"Refusing to run against {effective} — use absolute path outside /src"
     engine_id = id(db.get_engine())
-    logger.info(f"[BOOT] DB URI: {uri}, engine_id={engine_id}")
+    logger.info(f"[BOOT] DB locked to: {effective} (engine_id={engine_id})")
 
 # Initialize and start the automatic scheduler
 with app.app_context():

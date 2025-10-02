@@ -459,7 +459,8 @@ class DataProcessor:
             
             # Create DataFrame and save to CSV
             df = pd.DataFrame(trade_data)
-            csv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'trade_data.csv')
+            from src.paths import DATA_DIR
+            csv_path = DATA_DIR / 'trade_data.csv'
             df.to_csv(csv_path, index=False)
             
             logger.info(f"Exported {len(trade_records)} trade records to {csv_path}")
