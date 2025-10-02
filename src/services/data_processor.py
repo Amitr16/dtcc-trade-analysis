@@ -179,10 +179,15 @@ class DataProcessor:
             
         except Exception as e:
             logger.error(f"Error in data collection: {e}")
-            log_entry.status = 'error'
-            log_entry.error_message = str(e)
-            log_entry.execution_time_seconds = time.time() - start_time
-            db.session.commit()
+            db.session.rollback()
+            if 'log_entry' in locals():
+                log_entry.status = 'error'
+                log_entry.error_message = str(e)
+                log_entry.execution_time_seconds = time.time() - start_time
+                db.session.commit()
+        finally:
+            # Always remove session to prevent locks
+            db.session.remove()
     
     def run_data_analysis(self):
         """Run DTCC data analysis and store results"""

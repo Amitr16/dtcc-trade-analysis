@@ -4,7 +4,7 @@ services:
     env: python
     rootDir: ./
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT main_render:app
+    startCommand: gunicorn -w 1 -k gthread --threads 8 -b 0.0.0.0:$PORT main_render:app
     disk:
       name: dtcc-data
       mountPath: /var/data

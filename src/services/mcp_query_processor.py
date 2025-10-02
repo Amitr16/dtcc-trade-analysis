@@ -1,10 +1,29 @@
 import logging
+import time
 from typing import List, Dict, Any
 from datetime import datetime, date, timedelta
 from src.models.trade_data import TradeRecord, db
 from src.services.llm_analyzer import LLMAnalyzer, FallbackAnalyzer
 
 logger = logging.getLogger(__name__)
+
+def retry_db_operation(max_retries=3, delay=0.3):
+    """Decorator to retry database operations on lock errors"""
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for attempt in range(max_retries):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if "database is locked" in str(e).lower() and attempt < max_retries - 1:
+                        logger.warning(f"Database locked, retrying in {delay}s (attempt {attempt + 1}/{max_retries})")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        raise e
+            return None
+        return wrapper
+    return decorator
 
 class MCPQueryProcessor:
     """Model Context Protocol Query Processor - LLM-first approach"""
@@ -49,6 +68,7 @@ class MCPQueryProcessor:
             logger.error(f"Error processing query '{query}': {e}")
             return [{"type": "error", "content": f"Error processing query: {str(e)}"}]
 
+    @retry_db_operation(max_retries=3, delay=1)
     def _get_trades_by_date_range(self, start_date: date, end_date: date) -> List[Dict[str, Any]]:
         """Get trades within a date range"""
         try:
@@ -75,6 +95,7 @@ class MCPQueryProcessor:
             logger.error(f"Error getting trades by date range: {e}")
             return []
 
+    @retry_db_operation(max_retries=3, delay=1)
     def _get_all_trades(self) -> List[Dict[str, Any]]:
         """Get all trades"""
         try:

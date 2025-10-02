@@ -53,9 +53,17 @@ else:
         logger.warning(f"[DISK] /var/data not writable, falling back to {db_dir}: {e}")
 
     sqlite_path = db_dir / "app.db"
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{sqlite_path}"
-
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite+pysqlite:///{sqlite_path}?cache=shared"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "connect_args": {
+        "timeout": 10,
+        "check_same_thread": False,
+    },
+    "pool_pre_ping": True,
+    "pool_size": 5,
+    "max_overflow": 0,
+}
 CORS(app)
 db.init_app(app)
 
@@ -64,8 +72,31 @@ db.init_app(app)
 def health():
     return jsonify(ok=True), 200
 
-# Log the effective DB once app context is available
+# --- SESSION TEARDOWN (prevents database locks) ---
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    try:
+        db.session.remove()  # return connection to pool; releases locks
+    except Exception:
+        pass
+
+# Configure SQLite for better concurrency
+from sqlalchemy import event
+from sqlalchemy.engine import Engine
+
 with app.app_context():
+    @event.listens_for(Engine, "connect")
+    def _sqlite_pragmas(dbapi_connection, connection_record):
+        try:
+            cursor = dbapi_connection.cursor()
+            cursor.execute("PRAGMA journal_mode=WAL;")
+            cursor.execute("PRAGMA synchronous=NORMAL;")
+            cursor.execute("PRAGMA busy_timeout=10000;")  # 10s wait on locks
+            cursor.close()
+        except Exception:
+            pass
+
+    # Log the effective DB once app context is available
     uri = app.config["SQLALCHEMY_DATABASE_URI"]
     logger.info(f"[BOOT] DB URI: {uri}")
 
