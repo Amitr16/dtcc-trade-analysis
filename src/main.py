@@ -18,28 +18,35 @@ app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'sta
 # Configure app for production
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
 
-# Configure database URL for production
+# Prefer DATABASE_URL if provided (Render Postgres etc)
 database_url = os.environ.get('DATABASE_URL')
-if database_url and database_url.startswith('postgres://'):
-    # Convert postgres:// to postgresql:// for SQLAlchemy
-    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+
+if database_url:
+    # Render/Heroku style compatibility
+    if database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
-    # Fallback to SQLite for local development
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///src/database/app.db'
+    # Local/dev fallback (persisted disk path on Render if you really want SQLite)
+    # Use the mounted disk path so it survives restarts:
+    #   render.yaml mounts /opt/render/project
+    sqlite_path = os.environ.get('SQLITE_PATH', '/opt/render/project/data/app.db')
+    os.makedirs(os.path.dirname(sqlite_path), exist_ok=True)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{sqlite_path}"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Enable CORS for all routes
+# Enable CORS
 CORS(app)
+
+# Initialize DB BEFORE importing/registering routes
+db.init_app(app)
+
+# Import routes AFTER db is initialized
+from src.routes.api_fixed import api_bp, init_data_processor
 
 # Register API blueprint
 app.register_blueprint(api_bp, url_prefix='/api')
-
-# Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
 
 # Create database tables
 with app.app_context():
