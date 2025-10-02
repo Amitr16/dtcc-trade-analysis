@@ -52,7 +52,6 @@ def create_app():
     with app.app_context():
         try:
             # Ensure database directory exists
-            import os
             db_dir = os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', ''))
             if db_dir and not os.path.exists(db_dir):
                 os.makedirs(db_dir, exist_ok=True)
