@@ -1,6 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+# Import shared db instance from trade_data
+from .trade_data import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

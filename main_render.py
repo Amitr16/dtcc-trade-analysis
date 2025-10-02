@@ -22,7 +22,6 @@ def create_app():
     """Create and configure the Flask application"""
     from flask import Flask, send_from_directory, jsonify
     from flask_cors import CORS
-    from flask_sqlalchemy import SQLAlchemy
     
     app = Flask(__name__, static_folder='src/static')
     
