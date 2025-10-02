@@ -36,8 +36,13 @@ else:
     if APP_IN_RENDER:
         # Use persistent disk mount if available, fallback to project dir
         db_dir = Path(os.environ.get("DB_DIR", "/var/data"))  # Render "Disk" default mount
-        if not db_dir.exists():
+        
+        # Check if persistent disk is mounted and writable
+        if not db_dir.exists() or not os.access(db_dir, os.W_OK):
+            logger.warning(f"Persistent disk {db_dir} not available or not writable, using project directory")
             db_dir = Path("/opt/render/project")
+        else:
+            logger.info(f"Using persistent disk at {db_dir}")
     else:
         db_dir = Path(os.environ.get("DB_DIR", Path.cwd()))
     
@@ -60,10 +65,20 @@ from src.routes.api_fixed import api_bp, init_data_processor
 # Register API blueprint
 app.register_blueprint(api_bp, url_prefix='/api')
 
-# Create database tables
+# Create database tables (only if they don't exist)
 with app.app_context():
-    db.create_all()
-    logger.info("Database tables created successfully")
+    # Check if database file exists and has data
+    db_file = Path(app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", ""))
+    db_exists = db_file.exists() and db_file.stat().st_size > 0
+    
+    if not db_exists:
+        logger.info("Creating new database tables...")
+        db.create_all()
+        logger.info("Database tables created successfully")
+    else:
+        logger.info(f"Database already exists at {db_file} ({db_file.stat().st_size} bytes)")
+        # Just ensure tables exist without recreating
+        db.create_all()
     
     # Guard against accidental overrides
     effective = app.config["SQLALCHEMY_DATABASE_URI"]
