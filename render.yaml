@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: dtcc-trade-analysis
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python src/main.py
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: OPENAI_API_KEY
+        sync: false  # You'll set this in Render dashboard
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dtcc-db
+          property: connectionString
+    healthCheckPath: /
+    disk:
+      name: dtcc-storage
+      mountPath: /opt/render/project/src
+      sizeGB: 1
+
+databases:
+  - name: dtcc-db
+    plan: starter
+    databaseName: dtcc_analysis
+    user: dtcc_user

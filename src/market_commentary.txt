@@ -1,0 +1,128 @@
+
+
+================================================================================^^USD SDR deals today^^
+
+^^USD Outrights^^
+Spot - 5M traded 1k DV01 (Rate range: 0.0000–0.0365)
+Spot - 12M traded 3k DV01 (Rate: 0.0357)
+H6 - 12M traded 1k DV01
+U6 - 12M traded 1k DV01
+Spot - 3Y traded 1k DV01 (Rate: 0.0328)
+Spot - 5Y traded 265k DV01 (Rate range: 0.0310–0.0333)
+Spot - 10Y traded 1k DV01 (Rate range: 0.0000–0.0362)
+Spot - 15Y traded 5k DV01 (Rate range: 0.0385–0.0385)
+Spot - 20Y traded 1k DV01 (Rate: 0.0395)
+Spot - 30Y traded 5k DV01 (Rate range: 0.0392–0.0392)
+
+^^USD Spreads^^
+
+^^10Y vs 7Y^^
+Spot - 10Y vs 7Y traded <1k DV01 (Rate: 0.2 bps)
+
+^^USD Butterflies^^
+
+^^8Y vs 9Y vs 10Y^^
+Spot - 8Y vs 9Y vs 10Y traded 1k DV01 (Rate: 0.0 bps)
+
+^^EUR SDR deals today^^
+
+^^EUR Outrights^^
+Spot - 2Y traded 2k DV01 (Rate: 0.0190)
+Spot - 10Y traded 4k DV01 (Rate: 0.0265)
+
+^^EUR Spreads^^
+
+^^12M vs 2Y^^
+2025-08-26 - 12M vs 2Y traded <1k DV01
+
+^^GBP SDR deals today^^
+
+^^GBP Outrights^^
+Spot - 12M traded 4k DV01 (Rate: 0.0384)
+
+^^JPY SDR deals today^^
+
+^^JPY Outrights^^
+Spot - 1M traded 2k DV01 (Rate: 0.0051)
+Spot - 6M traded 91k DV01 (Rate: 0.0225)
+Spot - 9M traded 40k DV01 (Rate: 0.0164)
+Spot - 12M traded 604k DV01 (Rate range: 0.0077–0.0087)
+Spot - 2Y traded 243k DV01 (Rate range: -0.0031–0.0095)
+Z5 - 2Y traded 4k DV01
+M5 - 3Y traded 31k DV01 (Rate: 0.0072)
+2Y - 1Y traded 49k DV01 (Rate: 0.0067)
+Z5 - 5Y traded 5k DV01
+Spot - 7Y traded 199k DV01 (Rate: 0.0258)
+2025-12-22 - 7Y traded 87k DV01 (Rate: 0.0137)
+2028-04-19 - 5Y traded 12k DV01 (Rate: 0.0154)
+M5 - 10Y traded 99k DV01 (Rate: 0.0109)
+Spot - 10Y traded 122k DV01 (Rate: 0.0152)
+9M - 10Y traded 20k DV01 (Rate: 0.0164)
+7Y - 10Y traded 25k DV01 (Rate: 0.0258)
+6M - 20Y traded 108k DV01 (Rate: 0.0225)
+M5 - 30Y traded 105k DV01 (Rate: 0.0194)
+
+^^SGD SDR deals today^^
+
+^^SGD Outrights^^
+Z5 - 5Y traded 4k DV01 (Rate range: 0.0153–0.0154)
+
+^^AUD SDR deals today^^
+
+^^AUD Outrights^^
+2015-11-02 - 10Y traded 35k DV01 (Rate: 0.0546)
+Z6 - 12M traded 1k DV01 (Rate: 0.0347)
+Z7 - 1Y traded 2k DV01 (Rate: 0.0366)
+Z5 - 3Y traded 1k DV01 (Rate: 0.0352)
+Spot - 5Y traded 26k DV01 (Rate: 0.0390)
+Spot - 10Y traded 1k DV01 (Rate: 0.0014)
+Z5 - 10Y traded 1k DV01 (Rate range: 0.0432–0.0432)
+
+^^THB SDR deals today^^
+
+^^THB Outrights^^
+2025-05-19 - 5Y traded 3k DV01
+2025-05-20 - 5Y traded 5k DV01
+2025-08-29 - 5Y traded 7k DV01
+Z5 - 5Y traded 10k DV01 (Rate: 0.0114)
+H6 - 5Y traded 8k DV01 (Rate: 0.0108)
+M5 - 7Y traded 6k DV01
+2022-06-27 - 10Y traded 2k DV01
+2023-06-28 - 10Y traded 4k DV01
+2023-07-07 - 10Y traded 6k DV01
+2023-07-11 - 10Y traded 6k DV01
+2024-04-22 - 10Y traded 6k DV01
+2024-04-23 - 10Y traded 5k DV01
+2024-04-24 - 10Y traded 3k DV01
+2024-05-08 - 10Y traded 3k DV01
+2025-06-06 - 10Y traded 2k DV01
+2025-08-25 - 10Y traded 4k DV01
+2025-08-27 - 10Y traded 2k DV01
+2025-08-28 - 10Y traded 6k DV01
+2025-08-29 - 10Y traded 5k DV01
+
+^^TWD SDR deals today^^
+
+^^TWD Outrights^^
+Z5 - 2Y traded 1k DV01
+Z5 - 5Y traded 5k DV01 (Rate: 0.0176)
+
+^^KRW SDR deals today^^
+
+^^KRW Outrights^^
+2025-10-10 - 6M traded 473k DV01 (Rate: 0.0250)
+U5 - 12M traded 318k DV01
+2025-10-10 - 12M traded 10765k DV01 (Rate: 0.0246)
+Z5 - 12M traded 70k DV01 (Rate: 0.0244)
+H6 - 12M traded 709k DV01 (Rate: 0.0244)
+Z5 - 2Y traded 287k DV01
+Z5 - 3Y traded 74k DV01 (Rate: 0.0254)
+2025-10-15 - 4Y traded 243k DV01 (Rate: 0.0217)
+2025-10-10 - 5Y traded 2745k DV01 (Rate range: 0.0264–0.0264)
+Z5 - 5Y traded 393k DV01 (Rate: 0.0265)
+H6 - 5Y traded 226k DV01 (Rate: 0.0266)
+2025-10-10 - 10Y traded 418k DV01 (Rate: 0.0278)
+
+^^HKD SDR deals today^^
+
+^^HKD Outrights^^

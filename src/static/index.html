@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTCC Trade Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>DTCC Trade Analysis</h1>
+                </div>
+                <div class="header-actions">
+                    <div class="refresh-container">
+                        <div class="last-update" id="lastUpdateDisplay">
+                            <i class="fas fa-clock"></i>
+                            <span>Last Update: --:--</span>
+                        </div>
+                        <button class="btn btn-refresh" id="manualRefresh" title="Force refresh data and reload page">
+                            <i class="fas fa-sync-alt"></i>
+                            Force Refresh
+                        </button>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot" id="statusDot"></div>
+                        <span id="statusText">Connecting...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+
+            <!-- Trades Report Section -->
+            <section class="commentary-section">
+                <div class="section-header">
+                    <div class="section-title-container">
+                        <h2>Trades Report</h2>
+                        <button class="btn btn-outline" id="toggleTradesReport">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="view-toggle" id="tradesReportControls" style="display: none;">
+                        <button class="toggle-btn active" data-view="grouped">
+                            <i class="fas fa-layer-group"></i>
+                            Grouped by Date
+                        </button>
+                        <button class="toggle-btn" data-view="currency">
+                            <i class="fas fa-coins"></i>
+                            By Currency
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compact Filters -->
+                <div class="compact-filters" id="compactFilters" style="display: none;">
+                    <div class="filter-row">
+                        <div class="filter-item">
+                            <label for="currencySelect">Currencies</label>
+                            <div class="multi-select-container">
+                                <div class="multi-select" id="currencySelect">
+                                    <div class="multi-select-display" id="currencyDisplay">
+                                        Select currencies...
+                                    </div>
+                                    <div class="multi-select-dropdown" id="currencyDropdown">
+                                        <div class="search-container">
+                                            <input type="text" id="currencySearch" placeholder="Search currencies..." class="currency-search-input">
+                                        </div>
+                                        <div class="currency-options" id="currencyOptions">
+                                            <!-- Currency options will be populated dynamically -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label for="startDate">Date Range</label>
+                            <div class="date-range">
+                                <input type="date" id="startDate" class="date-input">
+                                <span class="date-separator">to</span>
+                                <input type="date" id="endDate" class="date-input">
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <button class="btn btn-primary" id="applyFilters">
+                                <i class="fas fa-filter"></i>
+                                Apply
+                            </button>
+                            <button class="btn btn-secondary" id="clearCurrencies">
+                                <i class="fas fa-times"></i>
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commentary-container" id="commentaryContainer" style="display: none;">
+                    <div class="loading-spinner" id="loadingSpinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading commentary data...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MCP Queries Section -->
+            <section class="mcp-section">
+                <div class="section-header">
+                    <h2>MCP Queries</h2>
+                    <div class="mcp-actions">
+                        <button class="btn btn-outline" id="clearQueryHistory">
+                            <i class="fas fa-trash"></i>
+                            Clear History
+                        </button>
+                        <button class="btn btn-outline" id="exportResults">
+                            <i class="fas fa-download"></i>
+                            Export Results
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Query Input -->
+                <div class="mcp-query-container">
+                    <div class="query-input-group">
+                        <input type="text" id="mcpQueryInput" placeholder="Ask a question about the trade data... (e.g., 'Show me all USD trades from today')" class="query-input">
+                        <button class="btn btn-primary" id="executeQuery">
+                            <i class="fas fa-search"></i>
+                            Query
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h4>Quick Actions:</h4>
+                        <div class="quick-buttons">
+                            <button class="quick-btn" data-query="Show me all USD trades from today">USD Analysis</button>
+                            <button class="quick-btn" data-query="What are the top 5 currencies by DV01 today?">Top Currencies</button>
+                            <button class="quick-btn" data-query="Show me all spread trades">Spread Analysis</button>
+                            <button class="quick-btn" data-query="Show me all butterfly trades">Butterfly Analysis</button>
+                            <button class="quick-btn" data-query="What's the average DV01 for 10Y trades?">Rate Analysis</button>
+                            <button class="quick-btn" data-query="Show me trades with DV01 > 100k">Large Trades</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Query Results -->
+                <div class="mcp-results-container">
+                    <div class="results-header">
+                        <h3>Query Results</h3>
+                        <span class="results-count" id="resultsCount">0 results</span>
+                    </div>
+                    <div class="results-content" id="mcpResults">
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>Enter a query above to get started</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Query History -->
+                <div class="mcp-history-container">
+                    <div class="history-header">
+                        <h3>Query History</h3>
+                        <button class="btn btn-sm btn-outline" id="toggleHistory">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="history-content" id="queryHistory" style="display: none;">
+                        <div class="history-list" id="historyList">
+                            <p class="no-history">No queries yet</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Logs Section -->
+            <section class="logs-section">
+                <div class="section-header">
+                    <div class="section-title-container">
+                        <h2>Processing Status</h2>
+                        <button class="btn btn-outline" id="toggleProcessingStatus">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-outline" id="refreshLogs">
+                        <i class="fas fa-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+                <div class="logs-container" id="logsContainer">
+                    <!-- Logs will be populated dynamically -->
+                </div>
+                <div class="logs-expandable" id="logsExpandable" style="display: none;">
+                    <!-- Additional logs will be shown here when expanded -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
+

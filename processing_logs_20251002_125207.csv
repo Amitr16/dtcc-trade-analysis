@@ -1,0 +1,4 @@
+id,run_timestamp,process_type,status,records_processed,error_message,execution_time_seconds
+1,2025-07-09T10:43:52.197202,parser,success,100,,0.38815784454345703
+2,2025-07-09T10:43:52.584210,analysis,success,93,,0.14202499389648438
+3,2025-07-09T10:43:53.076710,parser,running,0,,

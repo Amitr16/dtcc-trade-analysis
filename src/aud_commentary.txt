@@ -1,0 +1,23 @@
+^^AUD SDR deals today^^
+
+^^AUD Outrights^^
+2025-11-05 - 1M traded 1k DV01 (Rate range: 0.0350–0.0350)
+Spot - 4M traded 1k DV01 (Rate: 0.0429)
+2015-11-02 - 10Y traded 51k DV01 (Rate: 0.0546)
+Spot - 5M traded 1k DV01 (Rate range: 0.0360–0.0400)
+U5 - 12M traded 1k DV01 (Rate: 0.0329)
+Spot - 2Y traded 3k DV01 (Rate range: 0.0000–0.0363)
+Z5 - 2Y traded 3k DV01 (Rate: 0.0367)
+Z6 - 12M traded 1k DV01 (Rate: 0.0347)
+Z7 - 1Y traded 2k DV01 (Rate: 0.0366)
+Z5 - 3Y traded 1k DV01 (Rate: 0.0352)
+2025-10-10 - 4Y traded 7k DV01 (Rate range: 0.0000–0.0315)
+3Y - 2Y traded 1k DV01
+Spot - 5Y traded 26k DV01 (Rate range: 0.0389–0.0390)
+Z5 - 5Y traded 2k DV01 (Rate range: 0.0390–0.0390)
+Z9 - 2Y traded 2k DV01 (Rate: 0.0441)
+Spot - 7Y traded 3k DV01 (Rate range: 0.0000–0.0508)
+Spot - 10Y traded 2k DV01 (Rate range: 0.0014–0.0429)
+2025-12-15 - 10Y traded 2k DV01 (Rate: 0.0431)
+Z5 - 10Y traded 29k DV01 (Rate range: 0.0431–0.0432)
+Z3 - 2Y traded 3k DV01 (Rate: 0.0500)

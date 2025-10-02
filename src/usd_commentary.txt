@@ -1,0 +1,49 @@
+^^USD SDR deals today^^
+
+^^USD Outrights^^
+Spot - 4M traded 1k DV01 (Rate range: 0.0000–0.0389)
+Spot - 5M traded 2k DV01 (Rate range: 0.0000–0.0376)
+Spot - 12M traded 4k DV01 (Rate range: 0.0357–0.0358)
+H6 - 12M traded 1k DV01
+Spot - 2Y traded 2k DV01 (Rate range: 0.0000–0.0334)
+U6 - 12M traded 1k DV01
+Z5 - 2Y traded 1k DV01 (Rate range: 0.0323–0.0323)
+H6 - 2Y traded 1k DV01
+Spot - 3Y traded 4k DV01 (Rate range: 0.0000–0.0328)
+Spot - 4Y traded 1k DV01 (Rate range: 0.0329–0.0329)
+Spot - 5Y traded 279k DV01 (Rate range: 0.0000–0.0488)
+Z5 - 5Y traded 1k DV01 (Rate range: 0.0331–0.0331)
+1Y - 5Y traded 1k DV01
+Spot - 7Y traded 1k DV01 (Rate range: 0.0344–0.0344)
+Spot - 10Y traded 4k DV01 (Rate range: 0.0000–0.0362)
+5Y - 5Y traded 1k DV01 (Rate range: 0.0396–0.0396)
+Z5 - 10Y traded 2k DV01 (Rate range: 0.0362–0.0362)
+H6 - 10Y traded 2k DV01
+1Y - 10Y traded 2k DV01
+Spot - 11Y traded 1k DV01 (Rate: 0.0367)
+Spot - 15Y traded 10k DV01 (Rate range: 0.0384–0.0385)
+U5 - 10Y traded 8k DV01 (Rate: 0.0445)
+Spot - 20Y traded 2k DV01 (Rate range: 0.0395–0.0395)
+U5 - 5Y traded 1k DV01 (Rate: 0.0401)
+2025-09-09 - 30Y traded 2k DV01
+U0 - 5Y traded 1k DV01 (Rate: 0.0361)
+Spot - 30Y traded 28k DV01 (Rate range: 0.0391–0.0393)
+Z5 - 30Y traded 3k DV01 (Rate range: 0.0391–0.0392)
+H6 - 30Y traded 2k DV01
+1Y - 30Y traded 2k DV01
+
+^^USD Spreads^^
+
+^^10Y vs 11Y^^
+Spot - 10Y vs 11Y traded 1k DV01 (Rate: 0.1 bps)
+
+^^10Y vs 7Y^^
+Spot - 10Y vs 7Y traded 1k DV01 (Rate: 0.2 bps)
+
+^^2Y vs 4Y^^
+Spot - 2Y vs 4Y traded 1k DV01 (Rate: -0.0 bps)
+
+^^USD Butterflies^^
+
+^^8Y vs 9Y vs 10Y^^
+Spot - 8Y vs 9Y vs 10Y traded 1k DV01 (Rate: 0.0 bps)

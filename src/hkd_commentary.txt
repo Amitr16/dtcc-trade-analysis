@@ -1,0 +1,8 @@
+^^HKD SDR deals today^^
+
+^^HKD Outrights^^
+Z5 - 2Y traded 2k DV01 (Rate: 0.0286)
+H5 - 5Y traded 1k DV01
+M5 - 5Y traded 1k DV01
+U5 - 5Y traded 1k DV01
+Z5 - 10Y traded 2k DV01 (Rate: 0.0322)

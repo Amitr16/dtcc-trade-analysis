@@ -1,0 +1,11 @@
+^^TWD SDR deals today^^
+
+^^TWD Outrights^^
+Spot - 12M traded 1k DV01 (Rate: 0.0167)
+Spot - 2Y traded 1k DV01 (Rate: 0.0164)
+Z5 - 2Y traded 4k DV01 (Rate: 0.0163)
+H5 - 5Y traded 1k DV01
+M5 - 5Y traded 1k DV01
+U5 - 5Y traded 1k DV01
+Z5 - 5Y traded 29k DV01 (Rate range: 0.0176–0.0176)
+Z5 - 10Y traded 4k DV01 (Rate: 0.0207)
