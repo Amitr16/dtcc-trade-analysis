@@ -315,6 +315,7 @@ def get_background_processing_status():
     try:
         from flask import current_app
         from datetime import datetime
+        from src.models.trade_data import ProcessingLog
         
         # Get recent processing logs
         recent_logs = ProcessingLog.query.order_by(ProcessingLog.run_timestamp.desc()).limit(3).all()

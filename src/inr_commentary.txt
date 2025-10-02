@@ -1,3 +1,4 @@
 ^^INR SDR deals today^^
 
-No INR trades found
+^^INR Outrights^^
+Z5 - 5Y traded 3k DV01

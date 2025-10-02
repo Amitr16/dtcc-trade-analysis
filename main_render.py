@@ -43,11 +43,13 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
     
-    # Initialize database
-    db = SQLAlchemy(app)
+    # Import models first
+    from models.trade_data import db, TradeRecord, StructuredTrade, Commentary, ProcessingLog
     
-    # Import models and routes
-    from models.trade_data import TradeRecord, StructuredTrade, Commentary, ProcessingLog
+    # Initialize database with the app
+    db.init_app(app)
+    
+    # Import routes
     from routes.api_fixed import api_bp
     
     # Register blueprints
@@ -70,7 +72,7 @@ def create_app():
         except Exception as e:
             logger.error(f"Error creating database tables: {e}")
     
-    return app, db
+    return app
 
 def init_data_processor(app):
     """Initialize the data processor for background tasks"""
@@ -84,7 +86,7 @@ def init_data_processor(app):
         return None
 
 # Create the app
-app, db = create_app()
+app = create_app()
 
 # Initialize data processor
 processor = init_data_processor(app)

@@ -3,7 +3,7 @@
 ^^JPY Outrights^^
 Spot - 1M traded 4k DV01 (Rate range: 0.0034–0.0171)
 Spot - 2M traded 17k DV01 (Rate range: 0.0083–0.0134)
-2025-10-31 - 2M traded 99k DV01 (Rate range: 0.0063–0.0064)
+2025-10-31 - 2M traded 161k DV01 (Rate range: 0.0063–0.0064)
 2025-12-22 - 1M traded 82k DV01 (Rate range: 0.0068–0.0068)
 Spot - 4M traded 31k DV01 (Rate: 0.0062)
 2025-08-20 - 6M traded 26k DV01
