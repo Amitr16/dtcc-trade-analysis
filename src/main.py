@@ -34,15 +34,29 @@ else:
     APP_IN_RENDER = bool(os.environ.get("RENDER"))  # Render always sets this
     
     if APP_IN_RENDER:
-        # Use persistent disk mount if available, fallback to project dir
-        db_dir = Path(os.environ.get("DB_DIR", "/var/data"))  # Render "Disk" default mount
+        # Force use of /var/data and fail fast if not available
+        db_dir = Path("/var/data")
         
-        # Check if persistent disk is mounted and writable
-        if not db_dir.exists() or not os.access(db_dir, os.W_OK):
-            logger.warning(f"Persistent disk {db_dir} not available or not writable, using project directory")
-            db_dir = Path("/opt/render/project")
-        else:
-            logger.info(f"Using persistent disk at {db_dir}")
+        # Hard-stop if persistent disk is not mounted and writable
+        def check_disk(path="/var/data"):
+            p = Path(path)
+            exists = p.exists()
+            try:
+                testfile = p / ".rw_test"
+                testfile.write_text("ok", encoding="utf-8")
+                writable = True
+                testfile.unlink(missing_ok=True)
+            except Exception as e:
+                writable = False
+            return exists, writable
+        
+        exists, writable = check_disk("/var/data")
+        logger.info(f"[DISK] /var/data exists={exists} writable={writable}")
+        
+        if not (exists and writable):
+            raise RuntimeError("Persistent disk /var/data not available or not writable - check Render disk configuration")
+        
+        logger.info(f"✅ Using persistent disk at {db_dir}")
     else:
         db_dir = Path(os.environ.get("DB_DIR", Path.cwd()))
     
@@ -80,8 +94,9 @@ with app.app_context():
         # Just ensure tables exist without recreating
         db.create_all()
     
-    # Guard against accidental overrides
+    # Guard against accidental overrides - hard-stop if wrong path
     effective = app.config["SQLALCHEMY_DATABASE_URI"]
+    assert "/opt/render/project/src/app.db" not in effective, f"Refusing to use {effective} - must use /var/data/app.db"
     assert "src/app.db" not in effective, f"Refusing to run against {effective} — use absolute path outside /src"
     engine_id = id(db.get_engine())
     logger.info(f"[BOOT] DB locked to: {effective} (engine_id={engine_id})")

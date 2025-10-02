@@ -5,13 +5,13 @@ import os
 # Determine the repository root
 REPO_ROOT = Path(__file__).resolve().parents[1]  # points to /opt/render/project
 
-# Data directories - prefer persistent disk in production
-if os.environ.get("RENDER") or os.environ.get("DATA_DIR"):
-    # Production - use environment variable or default
-    DATA_DIR = Path(os.environ.get("DATA_DIR", "/var/data"))
+# Data directories - force /var/data in production, current dir locally
+if os.environ.get("RENDER"):
+    # Production - MUST use /var/data for persistence
+    DATA_DIR = Path("/var/data")
 else:
     # Local development - use current directory
-    DATA_DIR = Path.cwd()
+    DATA_DIR = Path(os.environ.get("DATA_DIR", Path.cwd()))
 
 TMP_DIR = Path("/tmp")
 

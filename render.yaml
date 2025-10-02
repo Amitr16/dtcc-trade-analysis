@@ -3,6 +3,7 @@ services:
     name: dtcc-trade-analysis
     env: python
     plan: starter
+    rootDir: ./
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT main_render:app
     envVars:
