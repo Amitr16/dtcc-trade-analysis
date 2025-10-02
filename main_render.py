@@ -51,6 +51,13 @@ def create_app():
     # Initialize database tables
     with app.app_context():
         try:
+            # Ensure database directory exists
+            import os
+            db_dir = os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', ''))
+            if db_dir and not os.path.exists(db_dir):
+                os.makedirs(db_dir, exist_ok=True)
+                logger.info(f"Created database directory: {db_dir}")
+            
             db.create_all()
             logger.info("Database tables created successfully")
         except Exception as e:
