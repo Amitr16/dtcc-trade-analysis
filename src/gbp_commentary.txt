@@ -3,13 +3,27 @@
 ^^GBP Outrights^^
 2025-12-18 - 2M traded 6k DV01
 Z5 - 3M traded 6k DV01 (Rate: 0.0388)
-Spot - 9M traded 3k DV01 (Rate range: 0.0315–0.0365)
+Spot - 9M traded 8k DV01 (Rate range: 0.0315–0.0365)
 Spot - 10M traded 4k DV01 (Rate: 0.0355)
+Spot - 11M traded 1k DV01 (Rate: 0.0393)
 2025-10-15 - 12M traded 1k DV01 (Rate: 0.0330)
+9M - 12M traded 1k DV01 (Rate: 0.0365)
 2025-09-15 - 2Y traded 2k DV01 (Rate: 0.0331)
 Spot - 3Y traded 1k DV01 (Rate: 0.0375)
-2025-12-31 - 12Y traded 2k DV01 (Rate: 0.0429)
+Spot - 5Y traded 1k DV01 (Rate: 0.0383)
+H6 - 5Y traded 1k DV01
+Spot - 10Y traded 2k DV01 (Rate range: 0.0000–0.0415)
+2025-12-31 - 12Y traded 8k DV01 (Rate: 0.0429)
+2034-07-10 - 10Y traded 2k DV01
 2025-02-13 - 30Y traded 4k DV01
 2025-09-24 - 30Y traded 1k DV01
 2025-09-26 - 30Y traded 1k DV01
 Z4 - 31Y traded 4k DV01 (Rate: 0.0418)
+
+^^GBP Spreads^^
+
+^^10Y vs 2Y^^
+U5 - 10Y vs 2Y traded 1k DV01
+
+^^12M vs 2Y^^
+2025-10-15 - 12M vs 2Y traded <1k DV01 (Rate: -0.1 bps)

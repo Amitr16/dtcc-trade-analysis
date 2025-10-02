@@ -2,5 +2,5 @@
 
 ^^AUD Outrights^^
 Spot - 10Y traded 5k DV01 (Rate: 0.0428)
-Z5 - 10Y traded 20k DV01 (Rate: 0.0432)
+Z5 - 10Y traded 25k DV01 (Rate range: 0.0405–0.0432)
 2035-07-17 - 10Y traded 1k DV01 (Rate: 0.0518)

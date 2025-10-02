@@ -28,13 +28,15 @@ if database_url:
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 else:
     # Local/dev fallback - use absolute path to ensure same DB across all processes
-    # For production (Render), use the mounted disk path
-    if os.environ.get('RENDER'):
+    # Check if we're in production by looking for Render-specific paths or environment
+    if os.path.exists('/opt/render/project') or os.environ.get('RENDER') or os.environ.get('PORT'):
         # Production on Render - use the mounted disk
         sqlite_path = '/opt/render/project/app.db'
+        print(f"[PRODUCTION] Using Render database path: {sqlite_path}")
     else:
         # Local development
         sqlite_path = os.environ.get('SQLITE_PATH', os.path.abspath('app.db'))
+        print(f"[LOCAL] Using local database path: {sqlite_path}")
     
     # Only create directory if the path has a directory component
     dir_path = os.path.dirname(sqlite_path)
