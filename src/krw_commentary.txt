@@ -5,11 +5,11 @@
 Z5 - 6M traded 330k DV01
 U5 - 12M traded 318k DV01
 2025-10-10 - 12M traded 10765k DV01 (Rate: 0.0246)
-Z5 - 12M traded 70k DV01 (Rate: 0.0244)
+Z5 - 12M traded 177k DV01 (Rate range: 0.0233–0.0244)
 H6 - 12M traded 709k DV01 (Rate: 0.0244)
 2025-10-10 - 1Y traded 481k DV01 (Rate range: 0.0246–0.0247)
 2025-10-10 - 2Y traded 4470k DV01 (Rate: 0.0249)
-Z5 - 2Y traded 1640k DV01 (Rate range: 0.0248–0.0249)
+Z5 - 2Y traded 2352k DV01 (Rate range: 0.0248–0.0249)
 2016-07-08 - 12Y traded 478k DV01 (Rate: 0.0124)
 2025-10-10 - 3Y traded 76k DV01 (Rate: 0.0254)
 Z5 - 3Y traded 74k DV01 (Rate: 0.0254)

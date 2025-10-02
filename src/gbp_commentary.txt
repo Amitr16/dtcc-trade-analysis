@@ -1,31 +1,36 @@
 ^^GBP SDR deals today^^
 
 ^^GBP Outrights^^
-2025-11-06 - 1M traded 3k DV01 (Rate range: 0.0395–0.0396)
-2025-12-18 - 2M traded 3k DV01 (Rate range: 0.0391–0.0392)
+2025-11-06 - 1M traded 9k DV01 (Rate range: 0.0000–0.0396)
+2025-12-18 - 2M traded 11k DV01 (Rate range: 0.0379–0.0392)
 2026-02-05 - 1M traded 21k DV01 (Rate: 0.0381)
 Spot - 12M traded 7k DV01 (Rate: 0.0384)
 H6 - 12M traded 1k DV01
 2025-09-15 - 2Y traded 1k DV01 (Rate: 0.0332)
-Spot - 2Y traded 8k DV01 (Rate range: 0.0373–0.0375)
+Spot - 2Y traded 8k DV01 (Rate range: 0.0004–0.0375)
 2025-10-15 - 2Y traded 1k DV01 (Rate: 0.0336)
 Z5 - 2Y traded 3k DV01 (Rate range: 0.0371–0.0371)
-H6 - 2Y traded 9k DV01
-2Y - 1Y traded 1k DV01 (Rate range: 0.0374–0.0375)
+H6 - 2Y traded 11k DV01 (Rate: 0.0369)
+1Y - 2Y traded 1k DV01 (Rate range: 0.0369–0.0370)
+2Y - 1Y traded 5k DV01 (Rate range: 0.0374–0.0375)
 2025-10-15 - 3Y traded 1k DV01 (Rate: 0.0341)
+2025-10-09 - 4Y traded 1k DV01 (Rate: 0.0376)
+U8 - 2Y traded 2k DV01 (Rate: 0.0394)
 Spot - 5Y traded 3k DV01 (Rate range: 0.0001–0.0383)
-3Y - 2Y traded 3k DV01 (Rate range: 0.0394–0.0395)
+3Y - 2Y traded 10k DV01 (Rate range: 0.0394–0.0395)
 2025-10-15 - 5Y traded 1k DV01 (Rate range: 0.0333–0.0333)
-Z5 - 5Y traded 1k DV01 (Rate: 0.0382)
-H6 - 5Y traded 4k DV01 (Rate: 0.0383)
-5Y - 2Y traded 1k DV01 (Rate: 0.0429)
+Z5 - 5Y traded 2k DV01 (Rate range: 0.0382–0.0383)
+H6 - 5Y traded 5k DV01 (Rate: 0.0383)
+Z5 - 6Y traded 3k DV01 (Rate: 0.0389)
+5Y - 2Y traded 10k DV01 (Rate: 0.0429)
+Z5 - 9Y traded 3k DV01 (Rate: 0.0410)
 2025-08-29 - 10Y traded 1k DV01
-Spot - 10Y traded 8k DV01 (Rate range: -0.0004–0.0415)
+U0 - 5Y traded 2k DV01 (Rate: 0.0454)
 5Y - 5Y traded 3k DV01 (Rate range: 0.0455–0.0456)
 Z5 - 10Y traded 2k DV01 (Rate range: -0.0033–0.0417)
-H6 - 10Y traded 5k DV01 (Rate: 0.0420)
+H6 - 10Y traded 6k DV01 (Rate range: 0.0419–0.0420)
 Spot - 12Y traded 12k DV01 (Rate: 0.0429)
-2025-12-31 - 12Y traded 4k DV01 (Rate: 0.0430)
+2025-12-31 - 12Y traded 14k DV01 (Rate range: 0.0429–0.0431)
 U0 - 10Y traded 3k DV01
 U5 - 20Y traded 9k DV01
 H6 - 20Y traded 2k DV01
@@ -33,7 +38,6 @@ H6 - 25Y traded 1k DV01
 2025-05-15 - 30Y traded 1k DV01
 2025-08-04 - 30Y traded 1k DV01
 2025-08-29 - 30Y traded 2k DV01
-Spot - 30Y traded 5k DV01 (Rate range: 0.0464–0.0465)
 H6 - 30Y traded 5k DV01
 Z5 - 50Y traded 1k DV01 (Rate: 0.0449)
 

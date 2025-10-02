@@ -913,7 +913,7 @@ class DTCCDashboard {
             const data = await response.json();
             
             if (data.success) {
-                this.displayMCPResults(data.results, data.query);
+                this.displayMCPResults(data.results, data.query, data.processing_status);
                 this.addToQueryHistory(query);
                 this.showToast('Query executed successfully', 'success');
             } else {
@@ -932,8 +932,58 @@ class DTCCDashboard {
             <div class="mcp-loading">
                 <i class="fas fa-spinner fa-spin"></i>
                 <span>Processing query...</span>
+                <div class="processing-status">
+                    <div class="status-item">
+                        <i class="fas fa-database"></i>
+                        <span>Fetching trade data...</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Analyzing with AI...</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Generating insights...</span>
+                    </div>
+                </div>
             </div>
         `;
+        
+        // Start showing background processing status
+        this.startProcessingStatusUpdates();
+    }
+    
+    startProcessingStatusUpdates() {
+        // Simulate background processing status updates
+        const statusItems = document.querySelectorAll('.status-item');
+        let currentItem = 0;
+        
+        const updateStatus = () => {
+            // Reset all items
+            statusItems.forEach((item, index) => {
+                const icon = item.querySelector('i');
+                const text = item.querySelector('span');
+                
+                if (index < currentItem) {
+                    icon.className = 'fas fa-check-circle';
+                    icon.style.color = '#28a745';
+                } else if (index === currentItem) {
+                    icon.className = 'fas fa-spinner fa-spin';
+                    icon.style.color = '#007bff';
+                } else {
+                    icon.className = 'fas fa-circle';
+                    icon.style.color = '#6c757d';
+                }
+            });
+            
+            currentItem++;
+            if (currentItem <= statusItems.length) {
+                setTimeout(updateStatus, 1500); // Update every 1.5 seconds
+            }
+        };
+        
+        // Start the status updates
+        setTimeout(updateStatus, 500);
     }
 
     showMCPError(message) {
@@ -947,7 +997,7 @@ class DTCCDashboard {
         document.getElementById('resultsCount').textContent = '0 results';
     }
 
-    displayMCPResults(results, query) {
+    displayMCPResults(results, query, processingStatus = null) {
         const resultsContainer = document.getElementById('mcpResults');
         const resultsCount = document.getElementById('resultsCount');
         
@@ -965,7 +1015,7 @@ class DTCCDashboard {
         // Check if results are analysis/summary/commentary or table data
         const firstResult = results[0];
         if (firstResult.type === 'analysis' || firstResult.type === 'summary' || firstResult.type === 'commentary') {
-            this.displayAnalysisResults(results, resultsContainer, resultsCount);
+            this.displayAnalysisResults(results, resultsContainer, resultsCount, processingStatus);
         } else {
             // Create results table for regular data
             const table = this.createResultsTable(results);
@@ -975,7 +1025,7 @@ class DTCCDashboard {
         }
     }
 
-    displayAnalysisResults(results, resultsContainer, resultsCount) {
+    displayAnalysisResults(results, resultsContainer, resultsCount, processingStatus = null) {
         const result = results[0];
         const type = result.type;
         const content = result.content;
@@ -984,6 +1034,22 @@ class DTCCDashboard {
         
         const icon = type === 'summary' ? 'fas fa-chart-pie' : 'fas fa-comment-dots';
         const title = type === 'summary' ? 'Analysis Summary' : 'Market Commentary';
+        
+        // Build background processing status HTML
+        let backgroundStatusHtml = '';
+        if (processingStatus && processingStatus.active && processingStatus.messages.length > 0) {
+            backgroundStatusHtml = `
+                <div class="background-processing">
+                    <div class="processing-header">
+                        <i class="fas fa-cogs"></i>
+                        <span>Background Processing</span>
+                    </div>
+                    <div class="processing-messages">
+                        ${processingStatus.messages.map(msg => `<div class="processing-message">${msg}</div>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
         
         resultsContainer.innerHTML = `
             <div class="analysis-result">
@@ -1000,6 +1066,7 @@ class DTCCDashboard {
                 <div class="analysis-content">
                     <div class="analysis-text">${this.formatAnalysisContent(content)}</div>
                 </div>
+                ${backgroundStatusHtml}
             </div>
         `;
         

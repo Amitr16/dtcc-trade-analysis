@@ -1055,15 +1055,88 @@ section {
 /* Loading states */
 .mcp-loading {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem;
     color: #667eea;
 }
 
-.mcp-loading i {
+.mcp-loading > i {
     margin-right: 0.5rem;
     animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.mcp-loading > span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.processing-status {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.status-item i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+.status-item span {
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+/* Background processing status */
+.background-processing {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(102, 126, 234, 0.05);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 8px;
+}
+
+.processing-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.processing-header i {
+    font-size: 1rem;
+}
+
+.processing-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.processing-message {
+    font-size: 0.85rem;
+    color: #4a5568;
+    padding: 0.25rem 0;
+    border-left: 3px solid rgba(102, 126, 234, 0.3);
+    padding-left: 0.75rem;
 }
 
 @keyframes spin {

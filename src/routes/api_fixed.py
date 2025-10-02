@@ -296,15 +296,67 @@ def mcp_query():
         
         results = processor.process_query(query)
         
+        # Get background processing status
+        processing_status = get_background_processing_status()
+        
         return jsonify({
             'success': True,
             'query': query,
-            'results': results
+            'results': results,
+            'processing_status': processing_status
         })
         
     except Exception as e:
         logger.error(f"Error processing MCP query: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
+
+def get_background_processing_status():
+    """Get current background processing status"""
+    try:
+        from flask import current_app
+        from datetime import datetime
+        
+        # Get recent processing logs
+        recent_logs = ProcessingLog.query.order_by(ProcessingLog.run_timestamp.desc()).limit(3).all()
+        
+        status_messages = []
+        
+        # Check if analysis is currently running
+        if recent_logs and recent_logs[0].process_type == 'analysis' and recent_logs[0].status == 'running':
+            status_messages.append("🔄 Running data analysis...")
+        elif recent_logs and recent_logs[0].process_type == 'parser' and recent_logs[0].status == 'running':
+            status_messages.append("📊 Fetching new trade data...")
+        
+        # Check for recent commentary generation
+        if recent_logs:
+            for log in recent_logs:
+                if log.process_type == 'analysis' and log.status == 'success':
+                    status_messages.append(f"✅ Analysis completed: {log.records_processed} trades processed")
+                    break
+        
+        # Check if scheduler is active by looking at recent logs
+        if recent_logs:
+            # If we have recent successful analysis logs, scheduler is likely active
+            recent_analysis = [log for log in recent_logs if log.process_type == 'analysis' and log.status == 'success']
+            if recent_analysis:
+                last_analysis = recent_analysis[0]
+                time_diff = (datetime.utcnow() - last_analysis.run_timestamp).total_seconds()
+                if time_diff < 120:  # Within last 2 minutes
+                    status_messages.append("⏰ Background scheduler active - updating every 60 seconds")
+        
+        return {
+            'active': len(status_messages) > 0,
+            'messages': status_messages[:3],  # Limit to 3 messages
+            'last_update': recent_logs[0].run_timestamp.isoformat() if recent_logs else None
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting processing status: {e}")
+        return {
+            'active': False,
+            'messages': [],
+            'last_update': None
+        }
 
 def init_data_processor(app=None):
     """Initialize the data processor"""
