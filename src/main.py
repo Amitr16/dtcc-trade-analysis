@@ -38,6 +38,15 @@ else:
         logger.info(f"[DB] Using persistent disk: {db_dir}")
     except Exception as e:
         disk_ok = False
+        # Debug disk mount status
+        import stat
+        try:
+            stat_info = os.stat("/var/data")
+            logger.error(f"[DISK DEBUG] /var/data exists but not writable. Stat: {stat_info}")
+            logger.error(f"[DISK DEBUG] Mode: {oct(stat_info.st_mode)}, UID: {stat_info.st_uid}, GID: {stat_info.st_gid}")
+        except Exception as stat_e:
+            logger.error(f"[DISK DEBUG] /var/data not accessible at all: {stat_e}")
+        
         # fallback to project dir if disk not mounted/writable yet
         db_dir = Path("/opt/render/project")
         db_dir.mkdir(parents=True, exist_ok=True)
@@ -51,7 +60,7 @@ CORS(app)
 db.init_app(app)
 
 # --- HEALTH ENDPOINT (for Render) ---
-@app.get("/health")
+@app.route("/health")
 def health():
     return jsonify(ok=True), 200
 
