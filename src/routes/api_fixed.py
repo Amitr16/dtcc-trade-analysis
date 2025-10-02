@@ -5,6 +5,7 @@ import sys
 import json
 import subprocess
 import logging
+from src.models.trade_data import db, ProcessingLog
 
 logger = logging.getLogger(__name__)
 
@@ -183,7 +184,6 @@ def get_status():
         status_data = scheduler.get_status()
         
         # Get processing logs from database
-        from src.models.trade_data import ProcessingLog
         recent_logs = []
         try:
             db_logs = ProcessingLog.query.order_by(ProcessingLog.run_timestamp.desc()).limit(10).all()
@@ -315,7 +315,6 @@ def get_background_processing_status():
     try:
         from flask import current_app
         from datetime import datetime
-        from src.models.trade_data import ProcessingLog
         
         # Get recent processing logs
         recent_logs = ProcessingLog.query.order_by(ProcessingLog.run_timestamp.desc()).limit(3).all()

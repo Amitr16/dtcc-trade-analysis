@@ -2,6 +2,7 @@
 
 ^^HKD Outrights^^
 Z5 - 2Y traded 3k DV01 (Rate range: 0.0286–0.0287)
+H6 - 2Y traded 1k DV01
 H5 - 5Y traded 1k DV01
 M5 - 5Y traded 1k DV01
 U5 - 5Y traded 1k DV01

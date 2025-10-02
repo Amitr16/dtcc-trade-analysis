@@ -20,3 +20,4 @@ H6 - 5Y traded 226k DV01 (Rate: 0.0266)
 U5 - 10Y traded 239k DV01
 2025-10-10 - 10Y traded 1892k DV01 (Rate range: 0.0278–0.0278)
 Z5 - 10Y traded 645k DV01 (Rate: 0.0279)
+9Y - 10Y traded 569k DV01 (Rate: 0.0285)
