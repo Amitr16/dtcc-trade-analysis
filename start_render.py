@@ -53,7 +53,7 @@ def main():
     
     # Import and run the Flask app
     try:
-        from main import app, init_data_processor
+        from main_render import app, init_data_processor
         
         # Initialize data processor
         init_data_processor(app)

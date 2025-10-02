@@ -3,7 +3,7 @@
 ^^USD Outrights^^
 Spot - 4M traded 1k DV01 (Rate range: 0.0000–0.0389)
 Spot - 5M traded 2k DV01 (Rate range: 0.0000–0.0376)
-Spot - 12M traded 6k DV01 (Rate range: 0.0357–0.0358)
+Spot - 12M traded 6k DV01 (Rate range: 0.0000–0.0358)
 H6 - 12M traded 1k DV01
 Spot - 2Y traded 6k DV01 (Rate range: 0.0000–0.0334)
 U6 - 12M traded 1k DV01
@@ -18,9 +18,9 @@ Z5 - 5Y traded 2k DV01 (Rate range: 0.0330–0.0331)
 1Y - 5Y traded 1k DV01
 Spot - 6Y traded 3k DV01 (Rate: 0.0338)
 Spot - 7Y traded 7k DV01 (Rate range: 0.0344–0.0344)
-Spot - 8Y traded 3k DV01 (Rate range: 0.0000–0.0350)
-Spot - 10Y traded 6k DV01 (Rate range: 0.0000–0.0362)
-5Y - 5Y traded 2k DV01 (Rate range: 0.0396–0.0396)
+Spot - 8Y traded 7k DV01 (Rate range: 0.0000–0.0350)
+5Y - 5Y traded 2k DV01 (Rate range: 0.0395–0.0396)
+Spot - 10Y traded 10k DV01 (Rate range: 0.0000–0.0362)
 Z5 - 10Y traded 4k DV01 (Rate range: 0.0361–0.0362)
 H6 - 10Y traded 2k DV01 (Rate: 0.0363)
 1Y - 10Y traded 2k DV01

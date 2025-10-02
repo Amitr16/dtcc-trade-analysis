@@ -20,11 +20,11 @@ logger = logging.getLogger(__name__)
 
 def create_app():
     """Create and configure the Flask application"""
-    from flask import Flask
+    from flask import Flask, send_from_directory, jsonify
     from flask_cors import CORS
     from flask_sqlalchemy import SQLAlchemy
     
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='src/static')
     
     # Configure CORS
     CORS(app)
@@ -34,9 +34,14 @@ def create_app():
     if database_url and database_url.startswith('postgres://'):
         # Convert postgres:// to postgresql:// for SQLAlchemy
         database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    else:
+        # Use absolute path for SQLite
+        db_path = os.path.join(os.getcwd(), 'app.db')
+        app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
     
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///src/database/app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dtcc-analysis-secret-key-2025')
     
     # Initialize database
     db = SQLAlchemy(app)
@@ -48,15 +53,18 @@ def create_app():
     # Register blueprints
     app.register_blueprint(api_bp, url_prefix='/api')
     
+    # Add root route
+    @app.route('/')
+    def index():
+        return send_from_directory(app.static_folder, 'index.html')
+    
+    @app.route('/<path:filename>')
+    def static_files(filename):
+        return send_from_directory(app.static_folder, filename)
+    
     # Initialize database tables
     with app.app_context():
         try:
-            # Ensure database directory exists
-            db_dir = os.path.dirname(app.config['SQLALCHEMY_DATABASE_URI'].replace('sqlite:///', ''))
-            if db_dir and not os.path.exists(db_dir):
-                os.makedirs(db_dir, exist_ok=True)
-                logger.info(f"Created database directory: {db_dir}")
-            
             db.create_all()
             logger.info("Database tables created successfully")
         except Exception as e:
