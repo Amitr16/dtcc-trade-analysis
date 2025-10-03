@@ -1,16 +1,17 @@
 services:
   - type: web
-    name: dtcc-trade-analysis
+    name: dtcc-commentary-webapp
     env: python
-    rootDir: ./
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -w 1 -k gthread --threads 8 -b 0.0.0.0:$PORT main_render:app
-    disk:
-      name: dtcc-data
-      mountPath: /var/data
-      sizeGB: 1
+    plan: free
+    buildCommand: pip install -r requirements_webapp.txt
+    startCommand: python start_render.py
     envVars:
-      - key: DB_DIR
-        value: /var/data
-      - key: PYTHONUNBUFFERED
-        value: "1"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /
+    autoDeploy: true
+    branch: main

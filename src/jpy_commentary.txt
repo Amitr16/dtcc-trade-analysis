@@ -1,26 +1,33 @@
 ^^JPY SDR deals today^^
 
 ^^JPY Outrights^^
-Spot - 1M traded 2k DV01
+Spot - 1M traded 2k DV01 (Rate: 0.0000)
 Spot - 2M traded 63k DV01 (Rate range: 0.0083–0.0216)
 2025-10-31 - 2M traded 530k DV01 (Rate range: 0.0062–0.0064)
-2025-12-22 - 1M traded 36k DV01 (Rate: 0.0068)
-2026-01-26 - 2M traded 73k DV01 (Rate range: 0.0069–0.0072)
+2025-12-22 - 1M traded 36k DV01 (Rate range: 0.0068–0.0069)
+Spot - 5M traded 19k DV01 (Rate: 0.0064)
+2026-01-26 - 2M traded 418k DV01 (Rate range: 0.0000–0.0072)
 2024-04-04 - 2Y traded 35k DV01 (Rate: 0.0042)
 2025-04-04 - 1Y traded 38k DV01 (Rate: 0.0035)
-Spot - 12M traded 136k DV01 (Rate: 0.0078)
-Z5 - 2Y traded 173k DV01 (Rate: 0.0102)
+Z5 - 2Y traded 255k DV01 (Rate range: 0.0099–0.0102)
 U5 - 3Y traded 1k DV01
 2024-10-04 - 4Y traded 42k DV01 (Rate range: -0.0052–0.0052)
 Z5 - 3Y traded 1k DV01
-U8 - 2Y traded 44k DV01 (Rate range: 0.0114–0.0114)
-Z5 - 5Y traded 19k DV01 (Rate: 0.0123)
+2Y - 2Y traded 33k DV01 (Rate range: -0.0043–0.0108)
+2025-08-19 - 5Y traded 8k DV01 (Rate: 0.0105)
+U5 - 5Y traded 1k DV01
+U8 - 2Y traded 131k DV01 (Rate range: 0.0114–0.0114)
+3Y - 2Y traded 17k DV01 (Rate: 0.0045)
+Z5 - 5Y traded 103k DV01 (Rate range: 0.0123–0.0123)
+U9 - 2Y traded 100k DV01 (Rate: 0.0128)
+Z5 - 7Y traded 33k DV01 (Rate: 0.0136)
+2025-07-22 - 10Y traded 27k DV01
 U0 - 5Y traded 213k DV01 (Rate: 0.0041)
-Z5 - 10Y traded 538k DV01 (Rate range: 0.0149–0.0156)
+Z5 - 10Y traded 658k DV01 (Rate range: 0.0149–0.0156)
 H6 - 10Y traded 1k DV01
 Spot - 20Y traded 113k DV01 (Rate: 0.0217)
 Z5 - 20Y traded 62k DV01 (Rate: 0.0220)
-Spot - 30Y traded 788k DV01 (Rate: 0.0248)
+Spot - 30Y traded 1033k DV01 (Rate range: 0.0248–0.0248)
 Z5 - 30Y traded 49k DV01 (Rate: 0.0250)
 
 ^^JPY Spreads^^
