@@ -3,6 +3,7 @@ services:
     name: dtcc-commentary-webapp
     env: python
     plan: free
+    rootDir: dtcc-analysis-script
     buildCommand: pip install -r requirements_webapp.txt
     startCommand: python start_render.py
     envVars:
