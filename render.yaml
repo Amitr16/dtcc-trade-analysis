@@ -5,7 +5,7 @@ services:
     plan: free
     rootDir: dtcc-analysis-script
     buildCommand: pip install -r requirements_webapp.txt
-    startCommand: python start_render.py
+    startCommand: python start_with_fetcher.py
     envVars:
       - key: OPENAI_API_KEY
         sync: false
@@ -16,3 +16,14 @@ services:
     healthCheckPath: /
     autoDeploy: true
     branch: main
+
+  - type: worker
+    name: dtcc-fetcher
+    env: python
+    plan: free
+    rootDir: dtcc-analysis-script
+    buildCommand: pip install -r requirements_webapp.txt
+    startCommand: python dtcc_fetcher.py
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
